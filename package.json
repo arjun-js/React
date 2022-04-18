@@ -1,0 +1,24 @@
+{
+  "name": "Practicals",
+  "version": "1.0.0",
+  "description": "\"# React\"",
+  "main": "like_button.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arjun-js/React.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arjun-js/React/issues"
+  },
+  "homepage": "https://github.com/arjun-js/React#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  }
+}
