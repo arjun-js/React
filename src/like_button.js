@@ -1,27 +1,54 @@
-'use strict';
+const root = ReactDOM.createRoot(document.getElementById('container'));
 
-const LikeButton = ()=>{
-
-  const myName = 'Arjun';
-
-  function formatName (user){
-    return user.firstName + user.lastName;
+class Clock extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      date : new Date()
+    }
   }
 
-  const user = {
-    firstName : 'Satyanandaraju',
-    lastName : 'Arjun'
-  };
+  componentDidMount(){
+    this.timer = setInterval(()=> this.tick(), 1000);
+  }
 
-  return (
-    <div>
-      Hola Amigo, {myName}
-      <br></br>
-      formattedName : {formatName(user)}
+  componentWillUnmount(){
+    clearInterval(this.timer)
+  }
+
+  tick(){
+    this.setState({
+      date : new Date()
+    })
+  }
+
+  render(){
+    return (
+      <div>
+      <h1>Hello World new component</h1>
+      <h2>It is new date now : {this.state.date.toLocaleTimeString()}</h2>
     </div>
-  )
+    )
+  }
 }
 
-const domContainer = document.querySelector('#like_button_container');
-const root = ReactDOM.createRoot(domContainer);
-root.render(React.createElement(LikeButton))
+  root.render(<div>
+    <Clock/>
+    <Clock/>
+    <Clock/>
+    <Clock/>
+    </div>);
+
+
+
+
+// function Clock (props){
+
+//   return (
+// <div>
+//       <h1>Hello World new component</h1>
+//       <h2>It is new date now : {props.date.toLocaleTimeString()}</h2>
+//     </div>
+//   )
+
+// }
