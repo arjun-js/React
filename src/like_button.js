@@ -1,59 +1,24 @@
 const root = ReactDOM.createRoot(document.getElementById('container'));
 
+function UserGreeting(props){
+  return (<div>Hello {props.name}</div>)
+}
 
-// function Form(){
+function GuestGreeting(props){
+  return (<div>Hello Guest</div>)
+}
 
-//   const submitHandler = (event)=>{
-//     //event here is a synthetic event
-//    event.preventDefault();
-//     console.log('you clicked submit');
-//   }
+function Greeting(props){
+  const isLoggedIn = props.isLoggedIn;
 
-
-//   return (
-//     <div>
-//       <form onSubmit={submitHandler}>
-//         <button type='submit'>SUbmit click </button>
-//       </form>
-//     </div>
-//   )
-
-// }
-
-class Form extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      toggle : false,
-      text : 'hi'
-    }
-
-  //  this.submitHandler = this.submitHandler.bind(this);
-  }
-
-  submitHandler(text, event){
-    event.preventDefault();
-    this.setState(prevState=> {
-      return {
-      toggle: !prevState.toggle,
-      text
-    }});
-  }
-
-  render(){
-    return (
-      <form onSubmit={this.submitHandler.bind(this, 'hola')}>
-        <button type='submit'>Hello this is submit button</button>
-        <br>
-        </br>
-        {JSON.stringify(this.state.toggle)} 
-        <br>
-        </br>
-        {this.state.text}
-      </form>
-    )
+  if(isLoggedIn){
+    return <UserGreeting name={'Arjun'}/>
+  } else {
+    return <GuestGreeting/>
   }
 }
 
 
-  root.render(<Form></Form>);
+
+  root.render(<div><Greeting isLoggedIn={true}/>
+  <Greeting isLoggedIn={false}/></div>);
