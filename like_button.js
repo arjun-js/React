@@ -8,81 +8,72 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var root = ReactDOM.createRoot(document.getElementById('container'));
 
-var Clock = function (_React$Component) {
-  _inherits(Clock, _React$Component);
+// function Form(){
 
-  function Clock(props) {
-    _classCallCheck(this, Clock);
+//   const submitHandler = (event)=>{
+//     //event here is a synthetic event
+//    event.preventDefault();
+//     console.log('you clicked submit');
+//   }
 
-    var _this = _possibleConstructorReturn(this, (Clock.__proto__ || Object.getPrototypeOf(Clock)).call(this, props));
+
+//   return (
+//     <div>
+//       <form onSubmit={submitHandler}>
+//         <button type='submit'>SUbmit click </button>
+//       </form>
+//     </div>
+//   )
+
+// }
+
+var Form = function (_React$Component) {
+  _inherits(Form, _React$Component);
+
+  function Form(props) {
+    _classCallCheck(this, Form);
+
+    var _this = _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).call(this, props));
 
     _this.state = {
-      date: new Date()
-    };
-    return _this;
+      toggle: false,
+      text: 'hi'
+
+      //  this.submitHandler = this.submitHandler.bind(this);
+    };return _this;
   }
 
-  _createClass(Clock, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      this.timer = setInterval(function () {
-        return _this2.tick();
-      }, 1000);
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      clearInterval(this.timer);
-    }
-  }, {
-    key: 'tick',
-    value: function tick() {
-      this.setState({
-        date: new Date()
+  _createClass(Form, [{
+    key: 'submitHandler',
+    value: function submitHandler(text, event) {
+      event.preventDefault();
+      this.setState(function (prevState) {
+        return {
+          toggle: !prevState.toggle,
+          text: text
+        };
       });
     }
   }, {
     key: 'render',
     value: function render() {
       return React.createElement(
-        'div',
-        null,
+        'form',
+        { onSubmit: this.submitHandler.bind(this, 'hola') },
         React.createElement(
-          'h1',
-          null,
-          'Hello World new component'
+          'button',
+          { type: 'submit' },
+          'Hello this is submit button'
         ),
-        React.createElement(
-          'h2',
-          null,
-          'It is new date now : ',
-          this.state.date.toLocaleTimeString()
-        )
+        React.createElement('br', null),
+        JSON.stringify(this.state.toggle),
+        React.createElement('br', null),
+        this.state.text
       );
     }
   }]);
 
-  return Clock;
+  return Form;
 }(React.Component);
 
-root.render(React.createElement(
-  'div',
-  null,
-  React.createElement(Clock, null),
-  React.createElement(Clock, null),
-  React.createElement(Clock, null),
-  React.createElement(Clock, null)
-));
-
-// function Clock (props){
-
-//   return (
-// <div>
-//       <h1>Hello World new component</h1>
-//       <h2>It is new date now : {props.date.toLocaleTimeString()}</h2>
-//     </div>
-//   )
-
-// }
+root.render(React.createElement(Form, null));

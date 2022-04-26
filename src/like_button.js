@@ -1,54 +1,59 @@
 const root = ReactDOM.createRoot(document.getElementById('container'));
 
-class Clock extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      date : new Date()
-    }
-  }
 
-  componentDidMount(){
-    this.timer = setInterval(()=> this.tick(), 1000);
-  }
+// function Form(){
 
-  componentWillUnmount(){
-    clearInterval(this.timer)
-  }
+//   const submitHandler = (event)=>{
+//     //event here is a synthetic event
+//    event.preventDefault();
+//     console.log('you clicked submit');
+//   }
 
-  tick(){
-    this.setState({
-      date : new Date()
-    })
-  }
-
-  render(){
-    return (
-      <div>
-      <h1>Hello World new component</h1>
-      <h2>It is new date now : {this.state.date.toLocaleTimeString()}</h2>
-    </div>
-    )
-  }
-}
-
-  root.render(<div>
-    <Clock/>
-    <Clock/>
-    <Clock/>
-    <Clock/>
-    </div>);
-
-
-
-
-// function Clock (props){
 
 //   return (
-// <div>
-//       <h1>Hello World new component</h1>
-//       <h2>It is new date now : {props.date.toLocaleTimeString()}</h2>
+//     <div>
+//       <form onSubmit={submitHandler}>
+//         <button type='submit'>SUbmit click </button>
+//       </form>
 //     </div>
 //   )
 
 // }
+
+class Form extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      toggle : false,
+      text : 'hi'
+    }
+
+  //  this.submitHandler = this.submitHandler.bind(this);
+  }
+
+  submitHandler(text, event){
+    event.preventDefault();
+    this.setState(prevState=> {
+      return {
+      toggle: !prevState.toggle,
+      text
+    }});
+  }
+
+  render(){
+    return (
+      <form onSubmit={this.submitHandler.bind(this, 'hola')}>
+        <button type='submit'>Hello this is submit button</button>
+        <br>
+        </br>
+        {JSON.stringify(this.state.toggle)} 
+        <br>
+        </br>
+        {this.state.text}
+      </form>
+    )
+  }
+}
+
+
+  root.render(<Form></Form>);
