@@ -1,35 +1,32 @@
 var root = ReactDOM.createRoot(document.getElementById('container'));
 
-function UserGreeting(props) {
+function ListItem(props) {
   return React.createElement(
-    'div',
+    'li',
     null,
     'Hello ',
-    props.name
+    props.number
   );
 }
 
-function GuestGreeting(props) {
+function NumberList(props) {
+  var numbers = props.numbers;
+  var listItems = numbers.map(function (number) {
+    return React.createElement(ListItem, { key: Math.random() * number, number: number });
+  });
+
   return React.createElement(
     'div',
     null,
-    'Hello Guest'
+    React.createElement(
+      'ol',
+      null,
+      listItems
+    )
   );
 }
-
-function Greeting(props) {
-  var isLoggedIn = props.isLoggedIn;
-
-  if (isLoggedIn) {
-    return React.createElement(UserGreeting, { name: 'Arjun' });
-  } else {
-    return React.createElement(GuestGreeting, null);
-  }
-}
-
 root.render(React.createElement(
   'div',
   null,
-  React.createElement(Greeting, { isLoggedIn: true }),
-  React.createElement(Greeting, { isLoggedIn: false })
+  React.createElement(NumberList, { numbers: [1, 2, 3, 4, 5, 6] })
 ));

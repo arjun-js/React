@@ -1,24 +1,23 @@
 const root = ReactDOM.createRoot(document.getElementById('container'));
 
-function UserGreeting(props){
-  return (<div>Hello {props.name}</div>)
-}
-
-function GuestGreeting(props){
-  return (<div>Hello Guest</div>)
-}
-
-function Greeting(props){
-  const isLoggedIn = props.isLoggedIn;
-
-  if(isLoggedIn){
-    return <UserGreeting name={'Arjun'}/>
-  } else {
-    return <GuestGreeting/>
-  }
+function ListItem(props){
+  return (<li>Hello {props.number}</li>)
 }
 
 
 
-  root.render(<div><Greeting isLoggedIn={true}/>
-  <Greeting isLoggedIn={false}/></div>);
+function NumberList(props){
+  const numbers = props.numbers;
+  const listItems = numbers.map(number=>{
+    return <ListItem key={Math.random()*number} number={number}></ListItem>
+  });
+
+  return (
+    <div>
+      <ol>
+        {listItems}
+      </ol>
+    </div>
+  )
+}
+  root.render(<div><NumberList numbers={[1,2,3,4,5,6]}/></div>);
